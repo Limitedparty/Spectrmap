@@ -43,6 +43,11 @@ public class MapMaster {
         objects = objects + " " + id;
     }
 
+    public static void EditObject (ObjectTypes type, String data, int id) {
+        objects_type[id] = type;
+        objects_data[id] = data;
+    }
+
     public static boolean Save (String map_name) {
         try{
             PrintWriter writer = new PrintWriter("" + map_name.replace(" ", "") + ".txt", "UTF-8");
@@ -89,11 +94,15 @@ public class MapMaster {
             BufferedReader br = new BufferedReader(new FileReader(filepath.replace("&&", " ")));
             int ln = 0;
             while ((currentLine = br.readLine()) != null) {
-                if (currentLine != "") {
+                if (!currentLine.equals("")) {
                     // Дополнительные заголовки в файле
                     boolean rt = true;
                     if (currentLine.split(new String("=="))[0].equals("MAP-NAME")) {
                         Logic.mapName = currentLine.split(new String("=="))[1];
+                        rt = false;
+                    }
+                    if (currentLine.split(new String("=="))[0].equals("CONNECT-PASSIVE")) {
+                        Logic.urlPassive = currentLine.split(new String("=="))[1];
                         rt = false;
                     }
 
