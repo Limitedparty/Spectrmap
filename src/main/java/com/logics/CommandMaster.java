@@ -54,6 +54,7 @@ public class CommandMaster {
                 "\n  help - see this message" +
                 "\n  mode <view/editor> - change mode (for edit or for only view)" +
                 "\n  list - get list of objects" +
+                "\n  open <file path> - open map" +
                 "\n+ Editor commands:" +
                 "\n  selector <2vert/sector/pointer> - change selector tool method" +
                 "\n  setcolor <#hex> - set color for draw" +
@@ -63,8 +64,7 @@ public class CommandMaster {
                 "\n  dfiilrect - draw new object filled rect" +
                 "\n  dtext <your&&text> - draw text" +
                 "\n  undo - remove last object (from index)" +
-                "\n  save <map_name> - save map" +
-                "\n  open <file path> - open map");
+                "\n  save <map_name> - save map");
     }
 
     public static String mode_changer (String mode) {
