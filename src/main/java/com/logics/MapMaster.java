@@ -2,7 +2,10 @@ package com.logics;
 
 import org.newdawn.slick.util.Log;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Хранит и обрабатывает карту
@@ -42,25 +45,25 @@ public class MapMaster {
 
     public static boolean Save (String map_name) {
         try{
-            PrintWriter writer = new PrintWriter("test-by-test.txt", "UTF-8");
+            PrintWriter writer = new PrintWriter("" + map_name.replace(" ", "") + ".txt", "UTF-8");
 
             String[] objects_ids = MapMaster.objects.split(" ");
             writer.println("SPECTRMAP-FILE");
-            writer.println("MAP-NAME+==" + map_name);
+            writer.println("MAP-NAME==" + map_name);
             for (int x = 1; x < objects_ids.length; x++) {
                 int id = Integer.parseInt(objects_ids[x]);
                 switch (MapMaster.objects_type[id]) {
                     case LINE:
-                        writer.println(id + "+==0+==" + MapMaster.objects_data[id]);
+                        writer.println(id + "==0==" + MapMaster.objects_data[id]);
                         break;
                     case RECT:
-                        writer.println(id + "+==1+==" + MapMaster.objects_data[id]);
+                        writer.println(id + "==1==" + MapMaster.objects_data[id]);
                         break;
                     case FILLRECT:
-                        writer.println(id + "+==2+==" + MapMaster.objects_data[id]);
+                        writer.println(id + "==2==" + MapMaster.objects_data[id]);
                         break;
                     case TEXT:
-                        writer.println(id + "+==3+==" + MapMaster.objects_data[id]);
+                        writer.println(id + "==3==" + MapMaster.objects_data[id]);
                         break;
                     default:
                         break;
@@ -71,6 +74,58 @@ public class MapMaster {
             return true;
         } catch (Exception e) {
             Log.error("SAVE ERROR. ", e);
+            return false;
+        }
+    }
+
+    public static boolean Open (String filepath) {
+
+        // Чистим переменные
+        Logic.mapName = "no_name";
+        objects = "0";
+
+        try {
+            String currentLine;
+            BufferedReader br = new BufferedReader(new FileReader(filepath.replace("&&", " ")));
+            int ln = 0;
+            while ((currentLine = br.readLine()) != null) {
+                if (currentLine != "") {
+                    // Дополнительные заголовки в файле
+                    boolean rt = true;
+                    if (currentLine.split(new String("=="))[0].equals("MAP-NAME")) {
+                        Logic.mapName = currentLine.split(new String("=="))[1];
+                        rt = false;
+                    }
+
+
+                    // Основное потрошение файла
+                    if (rt) {
+                        try {
+                            switch (Integer.parseInt(currentLine.split(new String("=="))[1])) {
+                                case 0:
+                                    AddObject(ObjectTypes.LINE, currentLine.split(new String("=="))[2]);
+                                    break;
+                                case 1:
+                                    AddObject(ObjectTypes.RECT, currentLine.split(new String("=="))[2]);
+                                    break;
+                                case 2:
+                                    AddObject(ObjectTypes.FILLRECT, currentLine.split(new String("=="))[2]);
+                                    break;
+                                case 3:
+                                    AddObject(ObjectTypes.TEXT, currentLine.split(new String("=="))[2]);
+                                    break;
+                                default:
+                                    Log.warn("I don't know object type with id - " + Integer.parseInt(currentLine.split(new String("=="))[1]));
+                                    break;
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            Log.error("Error", e);
             return false;
         }
     }

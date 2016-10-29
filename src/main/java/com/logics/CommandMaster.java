@@ -42,6 +42,8 @@ public class CommandMaster {
             return List();
         } else if (commands[0].equals("save")) {
             return Save(commands[1]);
+        } else if (commands[0].equals("open")) {
+            return Open(cmd.replace("open ", "").replace(" ", "&&"));
         }
 
         return "Error. (cmd)";
@@ -60,7 +62,9 @@ public class CommandMaster {
                 "\n  drect - draw new object rect" +
                 "\n  dfiilrect - draw new object filled rect" +
                 "\n  dtext <your&&text> - draw text" +
-                "\n  undo - remove last object (from index)");
+                "\n  undo - remove last object (from index)" +
+                "\n  save <map_name> - save map" +
+                "\n  open <file path> - open map");
     }
 
     public static String mode_changer (String mode) {
@@ -155,6 +159,14 @@ public class CommandMaster {
             return "OK.";
         else
             return "FAIL.";
+    }
+
+    public static String Open (String file_path) {
+        if (MapMaster.Open(file_path)) {
+            return "OK.";
+        } else {
+            return "FAIL.";
+        }
     }
 
 }

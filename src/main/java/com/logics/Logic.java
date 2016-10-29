@@ -15,6 +15,8 @@ public class Logic {
     public static int[][] selectedPoints = new int[4][2];
     public static String currentColor = "#ffffff";
     public static int LineWidth = 1;
+    public static String mapName = "";
+
     public static void Tick (GameContainer gc, int delta) {
         InputMaster.Tick(gc);
     }
