@@ -1,8 +1,0 @@
-SPECTRMAP-FILE
-MAP-NAME+==111
-1+==0+==390 600 860 180 1 #ffffff
-2+==0+==240 180 960 650 10 #ffffff
-3+==1+==140 450 520 -310 10 #ffffff
-4+==2+==300 710 210 -60 #ffffff
-5+==3+==920 310 hi&&world #ffffff
-6+==3+==100 530 Hey,&&man! #ffffff
