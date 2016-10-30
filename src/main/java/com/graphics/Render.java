@@ -35,6 +35,17 @@ public class Render {
                 MouseRenderer.Renderer(gc, input.getMouseX(), input.getMouseY());
 
                 break;
+            case MAP_VIEW:
+                // Установка фона
+                gc.getGraphics().setBackground(Color.decode("#001f3f"));
+
+                Grid.Renderer(gc);
+                ObjectsRenderer.Renderer(gc);
+                Grid.RendererSelectedPoints(gc);
+                InfoRenderer.Renderer(gc, WindowState.MAP_VIEW);
+                MouseRenderer.Renderer(gc, input.getMouseX(), input.getMouseY());
+
+                break;
             default:
                 break;
         }

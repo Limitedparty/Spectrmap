@@ -1,5 +1,6 @@
 package com.graphics.elements;
 
+import com.logics.Logic;
 import com.logics.WindowState;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -17,6 +18,11 @@ public class InfoRenderer {
                 g.setColor(Color.decode("#CCD5FF"));
                 g.drawString("Editor Mode", 10, 10);
                 g.drawString("x: " + gc.getInput().getMouseX() + "  y:" + gc.getInput().getMouseY(), 200, 10);
+                g.drawString(Logic.mapName, 600, 10);
+                break;
+            case MAP_VIEW:
+                g.setColor(Color.decode("#CCD5FF"));
+                g.drawString(Logic.mapName, 10, 10);
                 break;
             default:
                 break;
