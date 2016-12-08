@@ -1,6 +1,9 @@
 # Spectrmap
 Map for displaying graphical information about status and etc.
 Example: map of your house (with real time information, open doors, windows), game map, galaxy map, strategic map.
+
+[Site page](frogling.com/spectrmap.php)
+
 ![alt tag](http://i.imgur.com/wwpirSC.png)
 Spectrmap can get updates from web site.
 
